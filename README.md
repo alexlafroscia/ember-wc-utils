@@ -1,7 +1,7 @@
 ember-wc-utils
 ==============================================================================
 
-[Short description of the addon.]
+> Utilities for working with WebComponents in Ember
 
 Installation
 ------------------------------------------------------------------------------
@@ -14,8 +14,29 @@ ember install ember-wc-utils
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
 
+**Capturing Custom Events**
+
+Ember has a hard time capturing custom events from WebComponents. This addon provides a component that would allow you to set up listeners for these custom events.
+
+The following will set up an event listener for a custom event called `dispatchedEvent`.
+
+```handlebars
+{{#custom-events onDispatchedEvent=(action 'someEmberAction')}}
+  <component-that-dispatches-custom-event>
+  </component-that-dispatches-custom-event>
+{{/custom-events}}
+```
+
+The custom event being dispatched should look something like:
+
+```javascript
+new CustomEvent('dispatchEvent', {
+  bubbles: true // Note: required
+});
+```
+
+The behavior of this component can also be applied to your own components through the `ember-wc-utils/mixins/on-custom-events` mixin.
 
 Contributing
 ------------------------------------------------------------------------------
@@ -27,7 +48,6 @@ Contributing
 * `npm install`
 
 ### Linting
-
 * `npm run lint:js`
 * `npm run lint:js -- --fix`
 
